@@ -18,7 +18,6 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -37,44 +36,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-
-class MyApp1 extends StatefulWidget {
-  @override
-  _MyApp1State createState() => _MyApp1State();
-}
-
-class _MyApp1State extends State<MyApp1> {
-  List<String> items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Dynamic ListView Example'),
-        ),
-        body: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(items[index]),
-            );
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Yahaan par aapko new item add karne ka logic dalna hoga
-            setState(() {
-              items.add('New Item ${items.length + 1}');
-            });
-          },
-          child: Icon(Icons.add),
-        ),
-      ),
-    );
-  }
-}
-
-// 3. As you can see in this picture, there is no text on top of the text box. There should be a text “ACT Score” right?

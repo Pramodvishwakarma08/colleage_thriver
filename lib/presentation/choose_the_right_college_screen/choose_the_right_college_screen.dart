@@ -35,7 +35,7 @@ class ChooseTheRightCollegeScreen extends GetWidget<ChooseTheRightCollegeControl
     "View your college matches",
     "Attend college fairs",
     "Visit colleges",
-    "Make your college",
+    "Apply to Colleges",
     "Send your deposit and transcript",
   ];
  static const List subtitle =[

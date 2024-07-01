@@ -456,7 +456,7 @@ final Map<String, String> enUs = {
   "lbl_select_month": "Select Month",
   "lbl_skip": "Skip",
   "lbl_thriver": "Thriver",
-  "lbl_todo": "TODO",
+  "lbl_todo": "TO DO",
   "lbl_upload_files": "Upload Files ",
   "msg_answer_a_few_short": "Answer a few short questions to get matched with the best colleges for you.",
   "msg_enter_college_names": "Enter college names",

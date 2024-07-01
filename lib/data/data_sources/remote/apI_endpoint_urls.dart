@@ -45,8 +45,6 @@ class AppUrls{
   static const String getTopStudents = "top-student";
   static const String allCollege = "all-college";
   static const String collegeSearch = "collegeSearch";
-
-
   static const String getFavCollege = "get-fav-college";
 
 
