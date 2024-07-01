@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "675007525384",
+    "project_id": "colleage-thriver-654fe",
+    "storage_bucket": "colleage-thriver-654fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675007525384:android:b77889144de3a1932997bd",
+        "android_client_info": {
+          "package_name": "com.app.colleage_thriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675007525384-5mcfr21bbgr3erl46pnrgne49lpb557c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.colleage_thriver",
+            "certificate_hash": "dff0dab326166c6317b2b123d37fd42788935863"
+          }
+        },
+        {
+          "client_id": "675007525384-ao6emns05sj48brj5fodcg1kbovlv0nj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbpuJwrMK3qtNZRmapiEn5bmICEBbdvt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675007525384-ao6emns05sj48brj5fodcg1kbovlv0nj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "675007525384-lcbnaqd3tbsti4jtgcen4o4c0cm57n20.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.colleageThriver"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
