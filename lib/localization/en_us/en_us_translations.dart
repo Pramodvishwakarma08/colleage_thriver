@@ -470,8 +470,8 @@ final Map<String, String> enUs = {
       "Improve your chances\rof getting into college",
   "msg_overall_act_score": "Overall ACT score",
   "msg_recommended_colleges": "Recommended Colleges",
-  "msg_sign_in_to_continue":
-      "Sign in to continue your college preparation journey",
+  "msg_sign_in_to_continue": "Sign In to continue your college preparation journey",
+  "msg_sign_up_to_continue": "Sign Up to continue your college preparation journey",
   "msg_university_of_alabama": "University of Alabama at Birmingham",
   "msg_what_is_your_current2": "What is your current ACT score?",
 

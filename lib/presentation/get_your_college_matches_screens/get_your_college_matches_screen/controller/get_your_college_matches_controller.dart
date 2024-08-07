@@ -6,14 +6,7 @@ import '../../../../data/data_sources/remote/api_client.dart';
 import '../models/get_your_college_matches_model.dart';
 
 
-/// A controller class for the GetYourCollegeMatchesScreen.
-///
-/// This class manages the state of the GetYourCollegeMatchesScreen, including the
-/// current getYourCollegeMatchesModelObj
 class GetYourCollegeMatchesController extends GetxController{
-
-
-
 
 
   TextEditingController addressController = TextEditingController();
@@ -34,10 +27,6 @@ class GetYourCollegeMatchesController extends GetxController{
     ), const DropdownMenuItem(
       value: 'New York',
       child: Text('New York'),
-    ),
-    const DropdownMenuItem(
-      value: 'ghggff',
-      child: Text('ghggff'),
     ),
     const DropdownMenuItem(
       value: 'Los Angeles',
@@ -65,6 +54,31 @@ class GetYourCollegeMatchesController extends GetxController{
     ),
   ];
 
+
+  List<String> dropdownYearList = [
+    '2010',
+    '2011',
+    '2012',
+    '2013',
+    '2014',
+    '2015',
+    '2016',
+    '2017',
+    '2018',
+    '2019',
+    '2020',
+    '2021',
+    '2022',
+    '2023',
+    '2024',
+    '2025',
+    '2026',
+    '2027',
+    '2028',
+
+
+  ];
+  String? whenStartClg;
 
 
 
@@ -145,17 +159,6 @@ class GetYourCollegeMatchesController extends GetxController{
       print("catch(e)==>$line");
     }
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

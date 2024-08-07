@@ -1,3 +1,4 @@
+import 'package:colleage_thriver/core/utils/textfield_validation.dart';
 import 'package:colleage_thriver/widgets/app_bar/appbar_home_page.dart';
 import 'controller/send_sat_act_scores_controller.dart';
 import 'package:flutter/material.dart';
@@ -55,12 +56,7 @@ class SendSatActScoresScreen extends GetWidget<SendSatActScoresController> {
                         controller: controller.nameEditTextController,
                         hintText: "msg_enter_college_names".tr,
                         textInputAction: TextInputAction.done,
-                        validator: (value) {
-                          if (!isText(value)) {
-                            return "err_msg_please_enter_valid_text".tr;
-                          }
-                          return null;
-                        }),
+                        validator:Validator.notEmpty),
                     Spacer(),
                     _buttonRow(),
                     SizedBox(height: 30.v),
@@ -112,6 +108,7 @@ class SendSatActScoresScreen extends GetWidget<SendSatActScoresController> {
             text: "lbl_mark_as_done".tr,
             margin: EdgeInsets.only(left: 12.h),
             onPressed: () {
+
               // onTapMarkAsDoneButton();
             }));
   }

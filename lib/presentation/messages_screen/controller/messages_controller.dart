@@ -6,21 +6,16 @@ import 'package:colleage_thriver/presentation/messages_screen/models/chat_room_m
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:socket_io_client/socket_io_client.dart';
+import '../../../main.dart';
+import '../../../sockettt/sockettt.dart';
 
-/// A controller class for the MessagesScreen.
-///
-/// This class manages the state of the MessagesScreen, including the
-/// current messagesModelObj
+
 class MessagesController extends GetxController {
   TextEditingController messageTextEditingController = TextEditingController();
-  Rxn<ChatRoomModel> chatRoomModel = Rxn();
-  Rxn<AllMessageModel> allMessageModel = Rxn();
+  final  Rxn<ChatRoomModel> chatRoomModel = Rxn();
+  final  Rxn<AllMessageModel> allMessageModel = Rxn();
 
   // RxList<Message> messages = <Message>[].obs;
-  late IO.Socket socket;
 
   @override
   onInit() async {
@@ -33,38 +28,18 @@ class MessagesController extends GetxController {
               body: null)
           .then((value) async {
         chatRoomModel.value = ChatRoomModel.fromJson(value.data);
+        activeChatId.value =chatRoomModel.value?.chat?.id ?? 0;
+        print("activeChatId.value==>${activeChatId.value}");
 
-        ApiClient().getRequest(endPoint: AppUrls.all_messages + chatRoomModel.value!.chat!.id.toString()).then((value) {
-          print("ASDFG");
-          allMessageModel.value = AllMessageModel.fromJson(value.data);});
-        try {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          socket = IO.io(AppUrls.mainUrl, <String, dynamic>{
-            'transports': ['websocket'],
-            'autoConnect': false,
-            'extraHeaders': {'Authorization': 'Bearer ${prefs.get("token")}'}
-          });
-          socket.connect();
-          socket.onConnect((data) {
-            print("line 36");
-            print(data);
-          });
+        ApiClient()
+            .getRequest(
+                endPoint: AppUrls.all_messages +
+                    chatRoomModel.value!.chat!.id.toString())
+            .then((value) {
 
-          socket.on('new-message', (data) {
-            print('new-message   : $data');
-            allMessageModel.value?.messages?.insert(
-                0,
-                Message(
-                    createdOn: DateTime.now().toUtc().toIso8601String(),
-                    chatId: chatRoomModel.value!.chat!.id,
-                    id: null,
-                    content: data["message"],
-                    isMentor: data["isMentor"],
-                    senderId: int.parse(data["sender"].toString())));
-            print('new-message   : $data');
-            allMessageModel.refresh();
-          });
-        } catch (e, s) {
+          allMessageModel.value = AllMessageModel.fromJson(value.data);
+        });
+        try {} catch (e, s) {
           Logger().e(e, stackTrace: s);
         }
       });
@@ -77,7 +52,7 @@ class MessagesController extends GetxController {
     if (messageTextEditingController.text.trim().isEmpty) {
       return;
     }
-    var apiData = await ApiClient().postRequest(
+    var apiData = ApiClient().postRequest(
       endPoint: AppUrls.send_message,
       body: {
         "chat_id": chatRoomModel.value!.chat!.id,
@@ -102,40 +77,6 @@ class MessagesController extends GetxController {
   @override
   void dispose() {
     super.dispose();
-    socket.dispose();
+    sockettt.dispose();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

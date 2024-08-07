@@ -88,8 +88,6 @@ import '../presentation/get_your_college_matches_screens/get_your_college_matche
 import '../presentation/get_your_college_matches_screens/get_your_college_matches_two_screen/get_your_college_matches_two_screen.dart';
 import '../presentation/home_screen/binding/home_screen_binding.dart';
 import '../presentation/home_screen/home_screen.dart';
-import '../presentation/map_screen/binding/map_binding.dart';
-import '../presentation/map_screen/map_screen.dart';
 import '../presentation/onboarding_screens/binding/onboarding_1_find_college_binding.dart';
 import '../presentation/onboarding_screens/onboarding_1_find_college_screen.dart';
 import '../presentation/recommended_colleges_screen/binding/recommended_colleges_one_binding.dart';

@@ -48,7 +48,7 @@ class SignupScreen extends GetWidget<SignupController> {
                             width: 220.h,
                             margin: EdgeInsets.only(left: 11.h),
                             child: Text(
-                                "msg_sign_in_to_continue".tr,
+                                "msg_sign_up_to_continue".tr,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: CustomTextStyles
@@ -69,7 +69,7 @@ class SignupScreen extends GetWidget<SignupController> {
                         SizedBox(height: 9.v),
                         CustomTextFormField(
                             inputFormatters: InputFormatters.spaceRestricted(),
-                            validator: Validator.validateFirstName,
+                            validator: Validator.validateLastName,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: controller.lastNameValueController),
                         SizedBox(height: 17.v),
@@ -218,7 +218,7 @@ class SignupScreen extends GetWidget<SignupController> {
   onTapSignup() {
     if (_formKeySignup.currentState!.validate()){
       if(controller.isChecked.value){
-        controller.onTapSignUp();
+        controller.signUpWithEmailAndPassword();
       }else{
         AppDialogUtils.showToast(message: "Please select privacy policy checkbox");
       }

@@ -66,11 +66,11 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo List'),
+        title: Text('TO DO List'),
         centerTitle: true,
         elevation: 0,
       ),
-      body: Column(
+      body:_todos.length==0 ? Center(child: Text("No TO DO found"),) : Column(
         children: <Widget>[
           Expanded(
             child: ListView.builder(
@@ -93,7 +93,7 @@ class _TodoListState extends State<TodoList> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text('Add Todo',style: TextStyle(fontSize: 16),),
+                title: Text('Add TO DO',style: TextStyle(fontSize: 16),),
                 content: CustomTextFormField(
                   controller: _controller,
                   maxLines: 4,
@@ -197,7 +197,7 @@ class TodoItemWidget extends StatelessWidget {
                       builder: (BuildContext context) {
                         TextEditingController controller = TextEditingController(text: todo.title);
                         return AlertDialog(
-                          title: Text('Edit Todo',style: TextStyle(fontSize: 16),),
+                          title: Text('Edit TO DO',style: TextStyle(fontSize: 16),),
                           content: CustomTextFormField(
                             controller: controller,
                             maxLines: 4,

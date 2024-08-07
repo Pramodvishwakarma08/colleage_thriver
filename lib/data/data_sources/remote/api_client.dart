@@ -1,6 +1,6 @@
-import 'package:colleage_thriver/core/utils/progress_dialog_utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:colleage_thriver/data/data_sources/remote/apI_endpoint_urls.dart';
@@ -26,12 +26,9 @@ class ApiClient {
   // getRequest
 
   Future<Response> getRequest({required String endPoint}) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final options =
-    //user id 13
-    //   Options(headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MTU2MTQ1Mjh9.laQ3SKA0Y7S5GRFfvA-X41aT1azY6YOqYurgXnscJhs"});
-      //Options(headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImVtYWlsIjoiZ3JlZW5zMUBtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTcxMjgxODk4NSwiZXhwIjoxNzEzMDc4MTg1fQ.oMUJ_DoiFgZdfrPlk0stJUvumd_QNK_SkjMelJaphh0"});
-     Options(headers: {"Authorization": "Bearer ${prefs.get("token")}"});
+    var _auth = await  FirebaseAuth.instance.currentUser?.getIdToken();
+    final options = Options(headers: {"Authorization": "Bearer ${_auth}"});
+    print("${_auth}");
     try {
       var response = await dio.get(endPoint, options: options);
       return response;
@@ -42,12 +39,8 @@ class ApiClient {
 
   Future<Response> postRequest(
       {required String endPoint, required dynamic body}) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final options =
-    // Options(headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MTU2MTQ1Mjh9.laQ3SKA0Y7S5GRFfvA-X41aT1azY6YOqYurgXnscJhs"});
-
-    Options(headers: {"Authorization": "Bearer ${prefs.get("token")}"});
-     //   Options(headers: {"Authorization": "Bearer ${prefs.get("token")}"});
+    var _auth = await  FirebaseAuth.instance.currentUser?.getIdToken();
+    final options = Options(headers: {"Authorization": "Bearer ${_auth}"});
     try {
       var response = await dio.post(endPoint, data: body, options: options);
       return response;
@@ -58,9 +51,9 @@ class ApiClient {
 }
 
 Future<Response>  createErrorEntity(DioException error) async {
-  print("asdfasdf{t${error.type}");
-  print("asdfasdf{t${error.response}");
-  print("asdfasdf{t${error.response}");
+  print("${error.type}");
+  print("${error.response}");
+  print("${error.response}");
   switch (error.type) {
     case DioExceptionType.badResponse:
       switch (error.response!.statusCode) {

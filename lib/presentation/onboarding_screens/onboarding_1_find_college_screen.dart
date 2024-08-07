@@ -1,5 +1,4 @@
 import 'package:colleage_thriver/presentation/onboarding_screens/widgets/onboard_first.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';

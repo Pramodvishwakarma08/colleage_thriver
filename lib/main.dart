@@ -1,3 +1,5 @@
+import 'package:colleage_thriver/sockettt/sockettt.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,16 +18,36 @@ void main() async{
     runApp(MyApp());
   });
 }
-
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+
   @override
   Widget build(BuildContext context) {
+    return LifeCycleManager(
+      child: App(),
+
+    );
+  }
+}
+
+
+class App extends StatelessWidget {
+
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+  // static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+
+
+  @override
+  Widget build(BuildContext context) {
+
     return Sizer(builder: (context, orientation, deviceType) {
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
         translations: AppLocalization(),
-        locale: Get.deviceLocale, //for setting localization strings
+        locale: Get.deviceLocale, // for setting localization strings
         fallbackLocale: Locale('en', 'US'),
         title: 'College Thriver',
         initialBinding: InitialBindings(),
@@ -35,9 +57,7 @@ class MyApp extends StatelessWidget {
     });
   }
 }
+RxInt activeChatId = 0.obs ;
 
 
-///sdfsdsdsdsdfsdfdfdfdf
-///sdfsdsdsdsdfsdfdfdfdf
-///sdfsdsdsdsdfsdfdfdfdf
-///sdfsdsdsdsdfsdfdfdfdf
+// govind.ctinfotech@gmail.com

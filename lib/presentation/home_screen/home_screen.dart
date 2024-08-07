@@ -1,12 +1,9 @@
-// ignore_for_file: unused_import
-
-
 import 'package:colleage_thriver/widgets/app_bar/appbar_home_page.dart';
 import 'package:logger/logger.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../main.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'controller/home_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +16,14 @@ class HomeScreen extends GetWidget<HomePageCollegeController> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void onReady() {
+    controller.isLoading.value = true;
+    controller.getProfile();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: appbarHomepage(context,true),
         body: Padding(
@@ -38,9 +42,9 @@ class HomeScreen extends GetWidget<HomePageCollegeController> {
                 Obx(
                       () => controller.isLoading.value
                       ? Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(
+                       baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                       child: Container(
                       decoration: BoxDecoration(
                           color: Colors.red,
                           borderRadius: BorderRadius.circular(200)),
@@ -215,6 +219,24 @@ class HomeScreen extends GetWidget<HomePageCollegeController> {
 
   /// Section Widget
   Widget _viewMatchesButton() {
+
+    // FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+    // FirebaseAnalytics analytics = FirebaseAnalytics();
+     App.analytics.logEvent(
+       name: 'viewMatchesButton',
+       parameters: <String, dynamic>{
+         'item_id': 'viewMatchesButton',
+         'item_name': 'viewMatchesButton_click',
+       },
+     );
+    // analytics.logEvent(
+    //   name: 'viewMatchesButton',
+    //   parameters: <String, dynamic>{
+    //     'item_id': 'viewMatchesButton',
+    //     'item_name': 'viewMatchesButton_click',
+    //   },
+    // );
     return Expanded(
         child: CustomOutlinedButton(
             text: "lbl_view_matches".tr,

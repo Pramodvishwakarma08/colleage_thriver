@@ -50,22 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCbpuJwrMK3qtNZRmapiEn5bmICEBbdvt8',
-    appId: '1:675007525384:android:b77889144de3a1932997bd',
-    messagingSenderId: '675007525384',
-    projectId: 'colleage-thriver-654fe',
-    storageBucket: 'colleage-thriver-654fe.appspot.com',
+    apiKey: 'AIzaSyDtXwj4E_B4ULZv4BEzhZ5ud8LjIgOl1E8',
+    appId: '1:1054509801709:android:bc9e997c2eaf766db4ece4',
+    messagingSenderId: '1054509801709',
+    projectId: 'college-thriver-app',
+    storageBucket: 'college-thriver-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCqS2N99S8TdQP3i9Kzg6MXVFpDsGbvAEQ',
-    appId: '1:675007525384:ios:8b9df3c56123d7df2997bd',
-    messagingSenderId: '675007525384',
-    projectId: 'colleage-thriver-654fe',
-    storageBucket: 'colleage-thriver-654fe.appspot.com',
-    androidClientId: '675007525384-5mcfr21bbgr3erl46pnrgne49lpb557c.apps.googleusercontent.com',
-    iosClientId: '675007525384-lcbnaqd3tbsti4jtgcen4o4c0cm57n20.apps.googleusercontent.com',
-    iosBundleId: 'com.example.colleageThriver',
+    apiKey: 'AIzaSyB37aW3BoABerpcJK0uTP_9Lrq7PylyF0s',
+    appId: '1:1054509801709:ios:62ad08bd744f968cb4ece4',
+    messagingSenderId: '1054509801709',
+    projectId: 'college-thriver-app',
+    storageBucket: 'college-thriver-app.appspot.com',
+    iosBundleId: 'com.app.collegethriverapp',
   );
 
 }

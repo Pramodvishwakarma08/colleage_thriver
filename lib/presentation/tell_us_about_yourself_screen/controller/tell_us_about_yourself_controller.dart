@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -91,7 +91,7 @@ class TellUsAboutYourselfController extends GetxController {
         String? ethnicity =
             ViewProfileModel.fromJson(response.data).data![0].ethnicity ?? null;
         if (ethnicity != null) {
-          list = jsonDecode(ethnicity).cast<String>();
+//         list = jsonDecode(ethnicity).cast<String>();
         }
         african_american.value = list?.contains("african_american") ?? false;
         american_indian.value = list?.contains("american_indian") ?? false;
@@ -171,9 +171,9 @@ class TellUsAboutYourselfController extends GetxController {
   }
 
   Future<void> updateProfileImage(CroppedFile file) async {
-    print("updateProfileImage");
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
+    print("updateProfileImageeeeee");
+
+    var token = await  FirebaseAuth.instance.currentUser?.getIdToken();
     print("otherer${file.path}");
     var dio = Dio();
     try {

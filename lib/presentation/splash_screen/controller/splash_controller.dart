@@ -1,5 +1,4 @@
 import 'package:colleage_thriver/core/app_export.dart';
-import 'package:colleage_thriver/presentation/notes/you_awesome_screen.dart';
 import 'package:colleage_thriver/presentation/splash_screen/models/splash_model.dart';
 import 'package:flutter/material.dart';
 import 'package:jailbreak_root_detection/jailbreak_root_detection.dart';
@@ -11,45 +10,25 @@ class SplashController extends GetxController {
   @override
   Future<void> onReady() async {
     Future.delayed(const Duration(milliseconds: 1000), () async {
-
-
-      final isNotTrust = await JailbreakRootDetection.instance.isNotTrust;
-      final isJailBroken = await JailbreakRootDetection.instance.isJailBroken;
-      final isRealDevice = await JailbreakRootDetection.instance.isRealDevice;
-      final isOnExternalStorage = await JailbreakRootDetection.instance.isOnExternalStorage;
-      final checkForIssues = await JailbreakRootDetection.instance.checkForIssues;
-      final isDevMode = await JailbreakRootDetection.instance.isDevMode;
-
-      if (isNotTrust) {
-        Get.offAll(() => WaringScreen(waring: "isNotTrust",));
-        return;
-      }
-      if (isJailBroken) {
-        Get.offAll(() => WaringScreen(waring: "isJailBroken",));
-        return;
-      }
-      if (isRealDevice) {
-        Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
-        return;
-      }
-      if (isOnExternalStorage) {
-        Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
-        return;
-      }
-
-      // if ( checkForIssues) {
-      //   Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
+      // final isNotTrust = await JailbreakRootDetection.instance.isNotTrust;
+      // final isJailBroken = await JailbreakRootDetection.instance.isJailBroken;
+      // final isRealDevice = await JailbreakRootDetection.instance.isRealDevice;
+      // final isOnExternalStorage =await JailbreakRootDetection.instance.isOnExternalStorage;
+       final checkForIssues = await JailbreakRootDetection.instance.checkForIssues;
+      // final isDevMode = await JailbreakRootDetection.instance.isDevMode;
+      //
+//94245 23807
+      //
+      // if (checkForIssues.isNotEmpty) {
+      //   Get.offAll(WaringScreen(waring: checkForIssues.map((e) => e.name).toList().join(", ")));
       //   return;
       // }
-      if (isDevMode) {
-        Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
-        return;
-      }
-      //  Get.to(() => TodoList());
-      // isOnboarding
 
+      // Get.to(() => TodoList());
+      // isOnboarding
+      //
       // isLoggedIn
-      // // default
+      // default
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       print("isLoggedIn ==>${prefs.get('isLoggedIn')}");
@@ -76,8 +55,9 @@ class SplashController extends GetxController {
 }
 
 class WaringScreen extends StatelessWidget {
-  String waring ;
-   WaringScreen({super.key,required this.waring});
+  String waring;
+
+  WaringScreen({super.key, required this.waring});
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +66,11 @@ class WaringScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text("Warning", style: TextStyle(fontSize: 50),),
             Text(
-              "Warning",
-              style: TextStyle(fontSize: 50),
-            ),  Text(
               "${waring}",
-              style: TextStyle(fontSize: 50),
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
             ),
           ],
         ),

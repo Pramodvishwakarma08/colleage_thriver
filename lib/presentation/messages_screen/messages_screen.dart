@@ -3,6 +3,7 @@ import 'package:colleage_thriver/services/date_time_services.dart';
 import 'package:colleage_thriver/widgets/app_bar/appbar_home_page.dart';
 import 'package:colleage_thriver/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
@@ -34,55 +35,57 @@ class MessagesScreen extends GetWidget<MessagesController> {
             child: Column(
               children: [
                 Expanded(
-                  child: ListView.builder(
-                    reverse: true,
-                    itemCount:
-                        (controller.allMessageModel.value?.messages ?? [])
-                            .length,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      try {
-                        Message? previousMessageModel;
+                  child: Obx(
+                    () => ListView.builder(
+                      reverse: true,
+                      itemCount:
+                          (controller.allMessageModel.value?.messages ?? [])
+                              .length,
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (context, index) {
                         try {
-                          previousMessageModel = controller
-                              .allMessageModel.value!.messages![index + 1];
-                        } catch (e) {}
+                          Message? previousMessageModel;
+                          try {
+                            previousMessageModel = controller
+                                .allMessageModel.value!.messages![index + 1];
+                          } catch (e) {}
 
-                        var m =
-                            controller.allMessageModel.value!.messages![index];
-                        return Column(
-                          children: [
-                            Builder(builder: (context) {
-                              try {
-                                return Container(
-                                  child: (previousMessageModel != null)
-                                      ? DateTimeServices.isSameDate(
-                                              date1:
-                                                  DateTime.parse(m.createdOn!)
-                                                      .toLocal(),
-                                              date2: DateTime.parse(
-                                                      previousMessageModel
-                                                          .createdOn!)
-                                                  .toLocal())
-                                          ? const SizedBox.shrink()
-                                          : messageDateStickyHeader(m)
-                                      : messageDateStickyHeader(m),
-                                );
-                              } catch (e, s) {
-                                return SizedBox.shrink();
-                                Logger().e(e, stackTrace: s);
-                              }
-                            }),
-                            otherMessageWidget(
-                                message: controller
-                                    .allMessageModel.value!.messages![index]),
-                          ],
-                        );
-                      } catch (e, s) {
-                        Logger().e(e, stackTrace: s);
-                      }
-                      return SizedBox.shrink();
-                    },
+                          var m = controller
+                              .allMessageModel.value!.messages![index];
+                          return Column(
+                            children: [
+                              Builder(builder: (context) {
+                                try {
+                                  return Container(
+                                    child: (previousMessageModel != null)
+                                        ? DateTimeServices.isSameDate(
+                                                date1:
+                                                    DateTime.parse(m.createdOn!)
+                                                        .toLocal(),
+                                                date2: DateTime.parse(
+                                                        previousMessageModel
+                                                            .createdOn!)
+                                                    .toLocal())
+                                            ? const SizedBox.shrink()
+                                            : messageDateStickyHeader(m)
+                                        : messageDateStickyHeader(m),
+                                  );
+                                } catch (e, s) {
+                                  return SizedBox.shrink();
+                                  Logger().e(e, stackTrace: s);
+                                }
+                              }),
+                              otherMessageWidget(
+                                  message: controller
+                                      .allMessageModel.value!.messages![index]),
+                            ],
+                          );
+                        } catch (e, s) {
+                          Logger().e(e, stackTrace: s);
+                        }
+                        return SizedBox.shrink();
+                      },
+                    ),
                   ),
                 ),
                 Container(
@@ -103,12 +106,21 @@ class MessagesScreen extends GetWidget<MessagesController> {
                   ),
                   child: TextField(
                     textAlign: TextAlign.left,
+                   keyboardType: TextInputType.text,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[ -~]')),
+                    ],                   // textInputAction: TextInputAction.,
                     decoration: InputDecoration(
                         alignLabelWithHint: true,
                         // isDense: true,
                         suffixIcon: InkWell(
                           onTap: () {
-                            controller.onTapSendMessage();
+                            if (controller
+                                .messageTextEditingController.text.isNotEmpty) {
+                              controller.onTapSendMessage();
+                            } else {
+                              print("object");
+                            }
                           },
                           child: Container(
                               padding: EdgeInsets.symmetric(vertical: 6.v),
@@ -248,7 +260,7 @@ class MessagesScreen extends GetWidget<MessagesController> {
     bool isSelfMessage = message.isMentor == 0;
     return Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 12.v),
+        padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 0.v),
         decoration: AppDecoration.fillWhiteA700,
         child: Column(
             mainAxisSize: MainAxisSize.min,

@@ -1,3 +1,4 @@
+import 'package:colleage_thriver/core/utils/textfield_validation.dart';
 import 'package:colleage_thriver/widgets/app_bar/appbar_home_page.dart';
 import 'controller/apply_to_scholarships_controller.dart';
 import 'package:flutter/material.dart';
@@ -51,12 +52,7 @@ class ApplyToScholarshipsScreen extends GetWidget<ApplyToScholarshipsController>
                 controller: controller.nameController,
                 hintText: "msg_enter_scholarship".tr,
                 textInputAction: TextInputAction.done,
-                validator: (value) {
-                  if (!isText(value)) {
-                    return "err_msg_please_enter_valid_text".tr;
-                  }
-                  return null;
-                },
+                validator: Validator.notEmpty,
               ),
               Spacer(),
               _buttonRow(),
@@ -126,7 +122,11 @@ class ApplyToScholarshipsScreen extends GetWidget<ApplyToScholarshipsController>
         Expanded(
           child: CustomElevatedButton(
             onPressed: () {
-              controller.updateCollefefairs();
+
+              if (_formKey.currentState!.validate()) {
+                controller.updateCollefefairs();
+              }
+             // controller.updateCollefefairs();
               // Get.back();
             },
             text: "lbl_mark_as_done".tr,

@@ -117,7 +117,7 @@ class AppDialogUtils {
 
   static void showToast({
     required String message,
-    Toast toastLength = Toast.LENGTH_SHORT,
+    Toast ? toastLength ,
     ToastGravity gravity = ToastGravity.BOTTOM,
     Color backgroundColor = Colors.purple,
     Color textColor = Colors.white,
@@ -125,7 +125,9 @@ class AppDialogUtils {
   }) {
     Fluttertoast.showToast(
       msg: message,
-      toastLength: toastLength,
+
+      toastLength: toastLength ?? Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: Toast.LENGTH_LONG == toastLength ?200 : 5,
       gravity: gravity,
       backgroundColor: Color(0xff7A62A3),
       textColor: textColor,

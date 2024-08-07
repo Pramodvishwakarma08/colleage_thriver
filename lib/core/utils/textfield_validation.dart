@@ -13,9 +13,9 @@ class Validator {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
     }
-    if (value.length < 8) {
-      return 'Password must be at least 8 characters long';
-    }
+    // if (value.length < 1) {
+    //   return 'Password must be at least 8 characters long';
+    // }
     // Add more password strength checks as needed
     return null;
   }

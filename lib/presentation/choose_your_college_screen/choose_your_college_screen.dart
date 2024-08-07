@@ -1,3 +1,4 @@
+import 'package:colleage_thriver/core/utils/textfield_validation.dart';
 import 'package:colleage_thriver/widgets/app_bar/appbar_home_page.dart';
 import 'controller/choose_your_college_controller.dart';
 import 'package:flutter/material.dart';
@@ -48,12 +49,7 @@ class ChooseYourCollegeScreen extends GetWidget<ChooseYourCollegeController> {
                 controller: controller.nameController,
                 hintText: "msg_enter_college_name".tr,
                 textInputAction: TextInputAction.done,
-                validator: (value) {
-                  if (!isText(value)) {
-                    return "err_msg_please_enter_valid_text".tr;
-                  }
-                  return null;
-                },
+                validator:Validator.notEmpty,
               ),
               Spacer(),
               _buttonRow(),
@@ -124,7 +120,10 @@ class ChooseYourCollegeScreen extends GetWidget<ChooseYourCollegeController> {
               isLoading: controller.isLoadingUpdateCollegeMatchOne.value,
                onPressed: () {
                  // Get.back();
-                  controller.updateCollefefairs();
+                 if (_formKey.currentState!.validate()) {
+                   controller.updateCollefefairs();
+                 }
+                //  controller.updateCollefefairs();
                },
               text: "lbl_mark_as_done".tr,
               margin: EdgeInsets.only(left: 12.h),

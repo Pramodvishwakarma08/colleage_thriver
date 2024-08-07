@@ -63,8 +63,11 @@ class MentorsScreen extends GetWidget<MentorsController> {
 
   /// GridView Widget
   Widget _buildPeopleCardGridView() {
-    return Expanded(
-      child: GridView.builder(
+    return  Expanded(
+      child: controller.mentorModel.allMentors!.length == 0 ?Center(child: Padding(
+        padding: const EdgeInsets.only(bottom: 100.0),
+        child: Text("Mentors are not available"),
+      ),) : GridView.builder(
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             mainAxisExtent: 210.v,

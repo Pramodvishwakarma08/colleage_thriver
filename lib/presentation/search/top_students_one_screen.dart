@@ -140,89 +140,100 @@ import 'package:colleage_thriver/core/app_export.dart';
 //
 // }
 
-
-
 class TopStudentsOneScreen extends StatefulWidget {
-
   @override
   State<TopStudentsOneScreen> createState() => _TopStudentsOneScreenState();
 }
 
 class _TopStudentsOneScreenState extends State<TopStudentsOneScreen> {
-
-  TopStudentsOneController controller =Get.find<TopStudentsOneController>();
+  TopStudentsOneController controller = Get.find<TopStudentsOneController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBa1(context),
       body: Obx(
-            ()=> controller.isLoading.value ? Center(child: CircularProgressIndicator(strokeWidth: 2,),) : Padding(
-          padding: EdgeInsets.only(left: 16.h, top: 10.v, right: 39.h,),
-          child:  ListView.separated(
-            physics: BouncingScrollPhysics(),
-            shrinkWrap: true,
-            separatorBuilder: (context, index,
-                ) {
-              return SizedBox(
-                height: 32.v,
-              );
-            },
-            itemCount: controller.collegeDetailListModel.message!.length,
-            itemBuilder: (context, index) {
-              // Universitycard1ItemModel model = controller.topStudentsOneModelObj.value.universitycard1ItemList.value[index];
-              return InkWell(
-                onTap: (){
-                  Get.to(()=>RecommendedCollegesSingleViewScreen(seletedClg: controller.collegeDetailListModel.message![index],));
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomImageView(
-                      border: Border.all(color: Colors.grey),
-                      imagePath: "${controller.collegeDetailListModel.message![index].photo}",
-                      height: 90.v,
-                      width: 119.h,
-                      fit: BoxFit.cover,
-                      radius: BorderRadius.circular(
-                        10.h,
-                      ),
-
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: 5.v,
-                        bottom: 7.v,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+        () => controller.isLoading.value
+            ? Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              )
+            : controller.collegeDetailListModel.message!.length==0 ? Center(child: Text("No results found"),) :   Padding(
+                padding: EdgeInsets.only(
+                  left: 16.h,
+                  top: 10.v,
+                  right: 39.h,
+                ),
+                child: ListView.separated(
+                  physics: BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  separatorBuilder: (
+                    context,
+                    index,
+                  ) {
+                    return SizedBox(
+                      height: 32.v,
+                    );
+                  },
+                  itemCount: controller.collegeDetailListModel.message!.length,
+                  itemBuilder: (context, index) {
+                    // Universitycard1ItemModel model = controller.topStudentsOneModelObj.value.universitycard1ItemList.value[index];
+                    return InkWell(
+                      onTap: () {
+                        Get.to(() => RecommendedCollegesSingleViewScreen(
+                              seletedClg: controller
+                                  .collegeDetailListModel.message![index],
+                            ));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            width: 194.h,
-                            child:  Text(
-                              "${controller.collegeDetailListModel.message![index].instnm}",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: CustomTextStyles.titleSmallBlack90001.copyWith(
-                                height: 1.60,
-                              ),
+                          CustomImageView(
+                            border: Border.all(color: Colors.grey),
+                            imagePath: controller
+                                .collegeDetailListModel.message?[index].photo,
+                            height: 90.v,
+                            width: 119.h,
+                            fit: BoxFit.cover,
+                            radius: BorderRadius.circular(
+                              10.h,
                             ),
                           ),
-                          SizedBox(height: 12.v),
-                          Text(
-                            "${controller.collegeDetailListModel.message![index].city}",
-                            style: theme.textTheme.labelLarge,
-
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 5.v,
+                              bottom: 7.v,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 194.h,
+                                  child: Text(
+                                    "${controller.collegeDetailListModel.message![index].instnm}",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: CustomTextStyles.titleSmallBlack90001
+                                        .copyWith(
+                                      height: 1.60,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 12.v),
+                                Text(
+                                  "${controller.collegeDetailListModel.message![index].city}",
+                                  style: theme.textTheme.labelLarge,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-        ),
+              ),
       ),
     );
   }
@@ -230,16 +241,19 @@ class _TopStudentsOneScreenState extends State<TopStudentsOneScreen> {
   /// Section Widget
 
   PreferredSizeWidget _buildAppBa1(context) {
-    return PreferredSize(preferredSize: Size(80,200),
+    return PreferredSize(
+        preferredSize: Size(80, 200),
         child: SafeArea(
-          child:  Padding(
-            padding:  EdgeInsets.all(10.0.h),
+          child: Padding(
+            padding: EdgeInsets.all(10.0.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(onPressed: () {
-                  Get.back();
-                }, icon: Icon(Icons.arrow_back_outlined)),
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(Icons.arrow_back_outlined)),
                 Container(
                   width: 318.h,
                   padding: EdgeInsets.only(left: 10.0),
@@ -249,23 +263,24 @@ class _TopStudentsOneScreenState extends State<TopStudentsOneScreen> {
                   ),
                   child: TextField(
                     controller: controller.searchController,
-                    onChanged: (value) {
-                      controller.getCollegeDetailList(controller.searchController.text);
+                    onChanged: (value) async {
+                      await Searchfun();
                       setState(() {});
                     },
                     style: CustomTextStyles.titleMediumBlack90001SemiBold,
                     decoration: InputDecoration(
                       hintText: 'Search...',
                       border: InputBorder.none,
-
                     ),
                   ),
                 ),
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 
+  Searchfun() async {
+    await controller.getCollegeDetailList(controller.searchController.text);
+  }
 }

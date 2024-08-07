@@ -1,3 +1,4 @@
+import 'package:colleage_thriver/core/utils/textfield_validation.dart';
 import 'package:colleage_thriver/widgets/app_bar/appbar_home_page.dart';
 import 'controller/attend_college_fairs_controller.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +51,7 @@ class AttendCollegeFairsScreen extends GetWidget<AttendCollegeFairsController> {
                 controller: controller.nameController,
                 hintText: "msg_enter_college_names".tr,
                 textInputAction: TextInputAction.done,
-                validator: (value) {
-                  if (!isText(value)) {
-                    return "err_msg_please_enter_valid_text".tr;
-                  }
-                  return null;
-                },
+                validator: Validator.notEmpty,
               ),
               Spacer(),
               SizedBox(height: 52.v),
@@ -126,7 +122,14 @@ class AttendCollegeFairsScreen extends GetWidget<AttendCollegeFairsController> {
           child: CustomElevatedButton(
              onPressed: () {
                // Get.back();
-               controller.updateCollefefairs();
+               if (_formKey.currentState!.validate()) {
+               //  controller.updateCollegeMatchOne();
+                 controller.updateCollefefairs();
+                 // Get.toNamed(
+                 //   AppRoutes.getYourCollegeMatchesThreeScreen,
+                 // );
+               }
+               //controller.updateCollefefairs();
              },
             text: "lbl_mark_as_done".tr,
             margin: EdgeInsets.only(left: 12.h),

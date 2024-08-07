@@ -56,9 +56,7 @@ class _MapScreenState extends State<MapScreen> {
     for (int i = 0; i < widget.locations.length; i++) {
       _markers.add(
         Marker(
-          icon: BitmapDescriptor.fromBytes(
-              widget.dataBytes.buffer.asUint8List(),
-              size: Size(0, 0)),
+          icon: BitmapDescriptor.defaultMarker,
           markerId: MarkerId('id-$i'),
           position: widget.locations[i],
           infoWindow: InfoWindow(
@@ -87,6 +85,7 @@ class _MapScreenState extends State<MapScreen> {
           zoom: 11.0,
         ),
         markers: _markers,
+        buildingsEnabled: true,
       ),
     );
   }

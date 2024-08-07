@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>675007525384-lcbnaqd3tbsti4jtgcen4o4c0cm57n20.apps.googleusercontent.com</string>
+	<string>1054509801709-6b617b2rnqkl62h42q5p1cifot96fmh7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.675007525384-lcbnaqd3tbsti4jtgcen4o4c0cm57n20</string>
+	<string>com.googleusercontent.apps.1054509801709-6b617b2rnqkl62h42q5p1cifot96fmh7</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>675007525384-5mcfr21bbgr3erl46pnrgne49lpb557c.apps.googleusercontent.com</string>
+	<string>1054509801709-qq5iebaf1sg45d6fldcql88mfbsd7pnv.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCqS2N99S8TdQP3i9Kzg6MXVFpDsGbvAEQ</string>
+	<string>AIzaSyB37aW3BoABerpcJK0uTP_9Lrq7PylyF0s</string>
 	<key>GCM_SENDER_ID</key>
-	<string>675007525384</string>
+	<string>1054509801709</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.colleageThriver</string>
+	<string>com.app.collegethriverapp</string>
 	<key>PROJECT_ID</key>
-	<string>colleage-thriver-654fe</string>
+	<string>college-thriver-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>colleage-thriver-654fe.appspot.com</string>
+	<string>college-thriver-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:675007525384:ios:8b9df3c56123d7df2997bd</string>
+	<string>1:1054509801709:ios:c39bc32ec7ac159fb4ece4</string>
 </dict>
 </plist>

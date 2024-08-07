@@ -5,6 +5,7 @@ import 'package:colleage_thriver/widgets/custom_elevated_button.dart';
 import 'package:colleage_thriver/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+import '../../../widgets/custom_drop_down.dart';
 import '../../../widgets/custom_dropdown/customDropdownTextField.dart';
 import 'controller/get_your_college_matches_controller.dart';
 
@@ -106,6 +107,7 @@ class GetYourCollegeMatchesScreen
                             Text('  ' + "msg_when_do_you_plan".tr,
                                 style: theme.textTheme.bodyMedium),
                             SizedBox(height: 8.v),
+                            _dropdwounYearInSchool(),
                             // CustomDropDown(
                             //     hintText: "lbl_select_year".tr,
                             //     items: controller.getYourCollegeMatchesModelObj
@@ -254,6 +256,41 @@ class GetYourCollegeMatchesScreen
     }
   }
 
+  Widget _dropdwounYearInSchool() {
+    return SizedBox(
+      width: Get.width,
+      height: 50.h,
+      child: DropdownButtonFormField(
+        // validator:Validator.validateDouble,
+        value: controller.whenStartClg,
+        items: controller.dropdownYearList.map((String item) {
+          return DropdownMenuItem(
+            value: item,
+            child: Text(item),
+          );
+        }).toList(),
+        style: CustomTextStyles.titleSmallBlack90001Medium,
+        onChanged: (value) {
+          // Update the selected item when the user selects a new item
+          controller.whenStartClg = value.toString();
+          // print("praodfdfdfsdf${value}");
+        },
+        icon: Padding(
+          padding: const EdgeInsets.only(right: 5.0),
+          child: Icon(
+            Icons.arrow_drop_down_rounded,
+            color: Colors.red,
+          ),
+        ),
+        decoration: decoration,
+        hint: Text(
+          "Select Year".tr,
+          style: CustomTextStyles.titleSmallBlack90001Medium,
+        ),
+      ),
+    );
+  }
+
 // Widget _dropdwounYearInSchool() {
 //   return Obx(
 //     ()=>controller.isLoadingCollegeGetMatchOne.value ? SizedBox(
@@ -315,40 +352,40 @@ class GetYourCollegeMatchesScreen
 //     ),
 //   );
 // }
-// InputDecoration get decoration => InputDecoration(
-//   hintStyle: CustomTextStyles.titleSmallBlack90001Medium,
-//   isDense: true,
-//   contentPadding:
-//   EdgeInsets.only(
-//     left: 10.h,
-//     top: 10.v,
-//     bottom: 10.v,
-//   ),
-//   fillColor:  appTheme.whiteA700,
-//   // filled: filled,
-//   border:
-//   OutlineInputBorder(
-//     borderRadius: BorderRadius.circular(12.h),
-//     borderSide: BorderSide(
-//       color: appTheme.gray60002,
-//       width: 1,
-//     ),
-//   ),
-//   enabledBorder:
-//   OutlineInputBorder(
-//     borderRadius: BorderRadius.circular(12.h),
-//     borderSide: BorderSide(
-//       color: appTheme.gray60002,
-//       width: 1,
-//     ),
-//   ),
-//   focusedBorder:
-//   OutlineInputBorder(
-//     borderRadius: BorderRadius.circular(12.h),
-//     borderSide: BorderSide(
-//       color: appTheme.gray60001,
-//       width: 1,
-//     ),
-//   ),
-// );
+InputDecoration get decoration => InputDecoration(
+  hintStyle: CustomTextStyles.titleSmallBlack90001Medium,
+  isDense: true,
+  contentPadding:
+  EdgeInsets.only(
+    left: 10.h,
+    top: 10.v,
+    bottom: 10.v,
+  ),
+  fillColor:  appTheme.whiteA700,
+  // filled: filled,
+  border:
+  OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide(
+      color: appTheme.gray60002,
+      width: 1,
+    ),
+  ),
+  enabledBorder:
+  OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide(
+      color: appTheme.gray60002,
+      width: 1,
+    ),
+  ),
+  focusedBorder:
+  OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide(
+      color: appTheme.gray60001,
+      width: 1,
+    ),
+  ),
+);
 }

@@ -9,75 +9,81 @@ import 'package:colleage_thriver/widgets/custom_checkbox_button.dart';
 import 'package:colleage_thriver/widgets/custom_elevated_button.dart';
 
 class GetYourCollegeMatchesOneScreen extends GetWidget<GetYourCollegeMatchesOneController> {
-  const GetYourCollegeMatchesOneScreen({Key? key}) : super(key: key);
+   GetYourCollegeMatchesOneScreen({Key? key}) : super(key: key);
+
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: myAppbar(title: "msg_get_your_college".tr),
-        body: Padding(
-          padding: EdgeInsets.only(left: 20.h,right: 20.h),
-          child: Obx(
-              ()=> controller.isLoadingCollegeGetMatchOne.value ? Center(child: CircularProgressIndicator(),) :  Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                 _activityRow(),
-                 SizedBox(height: 10.v),
-                 _progressRow(),
-                  SizedBox(height: 20.v),
-                  Text("msg_answer_a_few_short".tr,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.titleMediumPrimaryMedium
-                          .copyWith(height: 1.23)),
-                  SizedBox(height: 22.v),
-                  Padding(
-                      padding: EdgeInsets.only(left: 10.h),
-                      child: Text("msg_what_is_your_household".tr,
-                          style: theme.textTheme.bodyMedium)),
-                  SizedBox(height: 8.v),
-                  CustomTextFormField(
-                      controller: controller.householdincomeController,
-                      hintText: "Enter your houseHoldIncome".tr,
-                      validator: Validator.enterhouseHoldIncome,
-                      hintStyle: CustomTextStyles.titleSmallBlack90001Medium),
-                  // CustomDropDown(
-                  //     hintText: "lbl_select_option2".tr,
-                  //     alignment: Alignment.center,
-                  //     items: controller.getYourCollegeMatchesOneModelObj.value.dropdownItemList!.value,
-                  //     onChanged: (value) {
-                  //       controller.onSelected(value);
-                  //     }),
-                  SizedBox(height: 19.v),
-                  Padding(
-                   padding: EdgeInsets.only(left: 10.h),
-                    child: Text("msg_do_you_or_your_family".tr,
-                        style: theme.textTheme.bodyMedium),
-                  ),
-                  SizedBox(height: 8.v),
-                  // CustomDropDown(
-                  //     hintText: "msg_select_affiliation".tr,
-                  //     alignment: Alignment.center,
-                  //     items: controller.getYourCollegeMatchesOneModelObj
-                  //         .value.dropdownItemList1!.value,
-                  //     onChanged: (value) {
-                  //       controller.onSelected1(value);
-                  //     }),
-                  _dropdwounYearInSchool(),
-                  SizedBox(height: 19.v),
-                  Padding(
-                      padding: EdgeInsets.only(left: 10.h),
-                      child: Text("msg_how_are_you_paying".tr,
-                          style: theme.textTheme.bodyMedium)),
-                  SizedBox(height: 20.v),
-                 _checkBoxCloumn(),
-                  Spacer(),
-                  SizedBox(height: 58.v),
-                 _buttonRow(),
-                  SizedBox(height: 30.v),
+        body: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.only(left: 20.h,right: 20.h),
+            child: Obx(
+                ()=> controller.isLoadingCollegeGetMatchOne.value ? Center(child: CircularProgressIndicator(),) :  Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                   _activityRow(),
+                   SizedBox(height: 10.v),
+                   _progressRow(),
+                    SizedBox(height: 20.v),
+                    Text("msg_answer_a_few_short".tr,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: CustomTextStyles.titleMediumPrimaryMedium
+                            .copyWith(height: 1.23)),
+                    SizedBox(height: 22.v),
+                    Padding(
+                        padding: EdgeInsets.only(left: 10.h),
+                        child: Text("msg_what_is_your_household".tr,
+                            style: theme.textTheme.bodyMedium)),
+                    SizedBox(height: 8.v),
+                    CustomTextFormField(
+                        controller: controller.householdincomeController,
+                        hintText: "Enter your House Hold Income".tr,
+                        validator: Validator.enterhouseHoldIncome,
+                        textInputType: TextInputType.number,
+                        hintStyle: CustomTextStyles.titleSmallBlack90001Medium),
+                    // CustomDropDown(
+                    //     hintText: "lbl_select_option2".tr,
+                    //     alignment: Alignment.center,
+                    //     items: controller.getYourCollegeMatchesOneModelObj.value.dropdownItemList!.value,
+                    //     onChanged: (value) {
+                    //       controller.onSelected(value);
+                    //     }),
+                    SizedBox(height: 19.v),
+                    Padding(
+                     padding: EdgeInsets.only(left: 10.h),
+                      child: Text("msg_do_you_or_your_family".tr,
+                          style: theme.textTheme.bodyMedium),
+                    ),
+                    SizedBox(height: 8.v),
+                    // CustomDropDown(
+                    //     hintText: "msg_select_affiliation".tr,
+                    //     alignment: Alignment.center,
+                    //     items: controller.getYourCollegeMatchesOneModelObj
+                    //         .value.dropdownItemList1!.value,
+                    //     onChanged: (value) {
+                    //       controller.onSelected1(value);
+                    //     }),
+                    _dropdwounYearInSchool(),
+                    SizedBox(height: 19.v),
+                    Padding(
+                        padding: EdgeInsets.only(left: 10.h),
+                        child: Text("msg_how_are_you_paying".tr,
+                            style: theme.textTheme.bodyMedium)),
+                    SizedBox(height: 20.v),
+                   _checkBoxCloumn(),
+                    Spacer(),
+                    SizedBox(height: 58.v),
+                   _buttonRow(),
+                    SizedBox(height: 30.v),
 
 
-                ]),
+                  ]),
+            ),
           ),
         ));
   }
@@ -166,7 +172,13 @@ class GetYourCollegeMatchesOneScreen extends GetWidget<GetYourCollegeMatchesOneC
               child: Obx(
                   ()=> CustomElevatedButton(
                   isLoading: controller.isLoadingUpdateCollegeMatchOne.value,
-                    onPressed: (){controller.updateCollegeMatchesFour();},
+                    onPressed: (){
+                      if (_formKey.currentState!.validate()) {
+                        controller.updateCollegeMatchesFour();
+                      }
+                    // print("sdfg");
+                   // controller.updateCollegeMatchesFour();
+                    },
                     text: "lbl_mark_as_done".tr,
                     margin: EdgeInsets.only(left: 12.h)),
               ))

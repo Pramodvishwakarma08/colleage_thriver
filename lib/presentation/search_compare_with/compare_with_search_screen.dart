@@ -31,7 +31,7 @@ class _CompareWithSearchScreenState extends State<CompareWithSearchScreen> {
                   strokeWidth: 2,
                 ),
               )
-            : Padding(
+            : controller.collegeDetailListModel.message!.length==0 ? Center(child: Text("No results found"),) : Padding(
                 padding: EdgeInsets.only(
                   left: 16.h,
                   top: 10.v,

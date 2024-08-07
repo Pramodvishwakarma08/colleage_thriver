@@ -20,10 +20,7 @@ class GetYourCollegeMatchesThreeController extends GetxController {
       value: 'New York',
       child: Text('New York'),
     ),
-    const DropdownMenuItem(
-      value: 'ghggff',
-      child: Text('ghggff'),
-    ),
+
     const DropdownMenuItem(
       value: 'Los Angeles',
       child: Text('Los Angeles'),

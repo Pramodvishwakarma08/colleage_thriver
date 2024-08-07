@@ -1,8 +1,7 @@
-import 'package:colleage_thriver/presentation/login_screen/login_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:colleage_thriver/core/app_export.dart';
 import 'package:colleage_thriver/core/utils/progress_dialog_utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/data_sources/remote/apI_endpoint_urls.dart';
 import '../../../data/data_sources/remote/api_client.dart';
 import '../home_page_model.dart';
@@ -18,6 +17,19 @@ class HomePageCollegeController extends GetxController {
   RxDouble hight = 0.45.obs;
 
   HomePageModel? homePageModel;
+
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+  Future<void> logScreenView() async {
+    await FirebaseAnalytics.instance.setCurrentScreen(
+      screenName: 'HomeScreen',
+      screenClassOverride: 'HomeScreen',
+    );
+  }
+
+
+
+
 
   @override
   void onReady() {

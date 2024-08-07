@@ -5,7 +5,6 @@ import 'package:colleage_thriver/data/data_sources/remote/api_client.dart';
 import 'package:colleage_thriver/widgets/app_bar/appbar_home_page.dart';
 import 'package:colleage_thriver/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
