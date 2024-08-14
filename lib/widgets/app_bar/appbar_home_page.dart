@@ -1,6 +1,8 @@
 import 'package:colleage_thriver/core/app_export.dart';
 import 'package:colleage_thriver/presentation/home_screen/controller/home_screen_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +31,7 @@ void _showDeleteConfirmationDialog(BuildContext context) {
           TextButton(
             child: Text('Proceed to Delete Account'),
             onPressed: () {
-              deleteAccount();
+              _deleteAccount();
               Navigator.of(context).pop();
              // _showPasswordConfirmationDialog(context);
             },
@@ -295,7 +297,8 @@ _bottomsheetWidget(BuildContext context001) {
           SizedBox(height: 22.v),
           GestureDetector(
               onTap: () {
-                onTapFrame3();
+                _logOut();
+                print("object");
               },
               child: Row(children: [
                 CustomIconButton(
@@ -352,29 +355,46 @@ onTapFrame2() {
   );
 }
 
-/// Navigates to the loginScreen when the action is triggered.
-onTapFrame3() async {
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+Future<void> _logOut() async {
+  await _auth.currentUser?.getIdToken(true);
+
+   _auth.signOut();
+  // String? authorizationCode = await _auth.currentUser.au;
+  //await _auth.revokeTokenWithAuthorizationCode(authorizationCode);
+  _auth.signOut();
+  GoogleSignIn().signOut();
+
+  //await FirebaseAuth.instance.signOut();
+  Get.offAllNamed(AppRoutes.loginScreen,);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setBool('isLoggedIn', false);
-  Get.offAllNamed(
-    AppRoutes.loginScreen,
-  );
 }
 
-Future<void> deleteAccount() async {
 
-  try {
-    var response = await ApiClient().postRequest(endPoint: AppUrls.deletAccount, body: {});
-    if (response.statusCode == 200) {
-      AppDialogUtils.showToast(message: "${response.data["message"]}");
-      Get.offAllNamed(AppRoutes.loginScreen);
+Future<void> _deleteAccount() async {
+  User? user = _auth.currentUser;
+
+  if (user != null) {
+    try {
+      await user.delete();
+      await _auth.signOut();
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('isLoggedIn', false);
-    } else {
-      AppDialogUtils.showToast(message: "${response.data["message"]}");
+      prefs.setBool('isLoggedIn', false);
+      Get.offAllNamed(AppRoutes.loginScreen,);
+      AppDialogUtils.showToast(message: "Account deleted successfully");
+
+    } catch (e) {
+      if (e is FirebaseAuthException && e.code == 'requires-recent-login') {
+        AppDialogUtils.showToast(message: "Please log in again to delete your account");
+
+      } else {
+        print(e);
+        AppDialogUtils.showToast(message: "Failed to delete account");
+
+      }
     }
-  } catch (e, log) {
-    print("object${e.toString()}");
-    print("object${log}");
   }
+
 }

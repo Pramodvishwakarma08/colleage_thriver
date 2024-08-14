@@ -1,48 +1,40 @@
 {
   "project_info": {
-    "project_number": "675007525384",
-    "project_id": "colleage-thriver-654fe",
-    "storage_bucket": "colleage-thriver-654fe.appspot.com"
+    "project_number": "643926208914",
+    "project_id": "aerg-49d23",
+    "storage_bucket": "aerg-49d23.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:675007525384:android:b77889144de3a1932997bd",
+        "mobilesdk_app_id": "1:643926208914:android:794e8fdd362a6053c0d14b",
         "android_client_info": {
           "package_name": "com.app.colleage_thriver"
         }
       },
       "oauth_client": [
         {
-          "client_id": "675007525384-5mcfr21bbgr3erl46pnrgne49lpb557c.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.app.colleage_thriver",
-            "certificate_hash": "dff0dab326166c6317b2b123d37fd42788935863"
-          }
-        },
-        {
-          "client_id": "675007525384-ao6emns05sj48brj5fodcg1kbovlv0nj.apps.googleusercontent.com",
+          "client_id": "643926208914-j9ij2di8trjf5goo3h6broru37uk1pa6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbpuJwrMK3qtNZRmapiEn5bmICEBbdvt8"
+          "current_key": "AIzaSyCVadR_AdVnb2Nc1yORQmb39RYusIJxo3Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "675007525384-ao6emns05sj48brj5fodcg1kbovlv0nj.apps.googleusercontent.com",
+              "client_id": "643926208914-j9ij2di8trjf5goo3h6broru37uk1pa6.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "675007525384-lcbnaqd3tbsti4jtgcen4o4c0cm57n20.apps.googleusercontent.com",
+              "client_id": "643926208914-tiip9u2dol651p322u7evm66fngitbql.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.colleageThriver"
+                "bundle_id": "com.app.collegethriverapp"
               }
             }
           ]

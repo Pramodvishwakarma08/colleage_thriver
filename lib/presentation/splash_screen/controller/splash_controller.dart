@@ -13,38 +13,15 @@ class SplashController extends GetxController {
     Future.delayed(const Duration(milliseconds: 1000), () async {
 
 
-      final isNotTrust = await JailbreakRootDetection.instance.isNotTrust;
-      final isJailBroken = await JailbreakRootDetection.instance.isJailBroken;
-      final isRealDevice = await JailbreakRootDetection.instance.isRealDevice;
-      final isOnExternalStorage = await JailbreakRootDetection.instance.isOnExternalStorage;
-      final checkForIssues = await JailbreakRootDetection.instance.checkForIssues;
-      final isDevMode = await JailbreakRootDetection.instance.isDevMode;
+      // final isNotTrust = await JailbreakRootDetection.instance.isNotTrust;
+      // final isJailBroken = await JailbreakRootDetection.instance.isJailBroken;
+      // final isRealDevice = await JailbreakRootDetection.instance.isRealDevice;
+      // final isOnExternalStorage = await JailbreakRootDetection.instance.isOnExternalStorage;
+      // final checkForIssues = await JailbreakRootDetection.instance.checkForIssues;
+      // final isDevMode = await JailbreakRootDetection.instance.isDevMode;
+      //
 
-      if (isNotTrust) {
-        Get.offAll(() => WaringScreen(waring: "isNotTrust",));
-        return;
-      }
-      if (isJailBroken) {
-        Get.offAll(() => WaringScreen(waring: "isJailBroken",));
-        return;
-      }
-      if (isRealDevice) {
-        Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
-        return;
-      }
-      if (isOnExternalStorage) {
-        Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
-        return;
-      }
 
-      // if ( checkForIssues) {
-      //   Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
-      //   return;
-      // }
-      if (isDevMode) {
-        Get.offAll(() => WaringScreen(waring: "isOnExternalStorage",));
-        return;
-      }
       //  Get.to(() => TodoList());
       // isOnboarding
 

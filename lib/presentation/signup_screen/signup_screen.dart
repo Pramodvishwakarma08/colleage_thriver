@@ -218,7 +218,7 @@ class SignupScreen extends GetWidget<SignupController> {
   onTapSignup() {
     if (_formKeySignup.currentState!.validate()){
       if(controller.isChecked.value){
-        controller.onTapSignUp();
+        controller.signUpWithEmailAndPassword();
       }else{
         AppDialogUtils.showToast(message: "Please select privacy policy checkbox");
       }

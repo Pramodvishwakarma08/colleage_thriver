@@ -20,6 +20,7 @@ class HomeScreen extends GetWidget<HomePageCollegeController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: appbarHomepage(context,true),
         body: Padding(
