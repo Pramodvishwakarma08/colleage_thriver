@@ -71,6 +71,7 @@ dependencies:
   jailbreak_root_detection: ^1.1.5
   firebase_analytics: ^10.10.7
   animated_text_kit: ^4.2.2
+  win32: ^5.5.4
 
 
 
