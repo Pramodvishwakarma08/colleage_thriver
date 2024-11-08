@@ -60,11 +60,6 @@ class TellUsAboutYourselfController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    firstNameController.dispose();
-    lastNameController.dispose();
-    emailController.dispose();
-
-
   }
 
 

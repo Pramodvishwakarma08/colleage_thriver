@@ -3,12 +3,9 @@ class AppUrls{
   //MAIN
 
   // static const String mainUrl = "http://34.48.5.10:4000/";
-  static const String mainUrl = "https://www.collegethriverapp.org:4000/";
+   static const String mainUrl = "https://www.collegethriverapp.org:4000/";
 
-
-  //locaL
-  
-   //static const String mainUrl = "http://192.168.29.100:4000/";
+  // static const String mainUrl = "http://192.168.29.216:4000/";
 
   static const String login = "login";
   static const String loginWithGoogle = "google-login";

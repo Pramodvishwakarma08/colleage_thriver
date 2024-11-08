@@ -47,7 +47,7 @@ class Datum {
   String? dob;
   String? ethnicity;
   String? hghSclName;
-  int ? schoolYear;
+  String ? schoolYear;
   double ? gpa;
   String? groupAffiliation;
   String? graduationMonth;

@@ -1,4 +1,5 @@
 import 'package:colleage_thriver/core/utils/textfield_validation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../core/utils/text_field_input_formatters.dart';
 import 'controller/login_controller.dart';
 import 'package:flutter/material.dart';
@@ -27,15 +28,15 @@ class LoginScreen extends GetWidget<LoginController> {
                 SizedBox(height: 60.v),
                 CustomImageView(
                     imagePath: ImageConstant.imgRectangle593,
-                    height: 169.v,
-                    width: 162.h,
+                    height: 139.v,
+                    // width: 162.h,
                     alignment: Alignment.center),
-                SizedBox(height: 52.v),
+                SizedBox(height: 32.v),
                 Padding(
                     padding: EdgeInsets.only(left: 8.h),
                     child: Text("lbl_welcome_back".tr,
                         style: CustomTextStyles.titleLargeRobotoYellow80001)),
-                SizedBox(height: 9.v),
+                SizedBox(height: 0.v),
                 Container(
                     width: 200.h,
                     margin: EdgeInsets.only(left: 8.h),
@@ -89,8 +90,10 @@ class LoginScreen extends GetWidget<LoginController> {
                 SizedBox(height: 30.v),
                 // GoogleSignInButton(),
                 GoogleButton(),
-
-                SizedBox(height: 50.v),
+                SizedBox(height: 20.v),
+                if(GetPlatform.isAndroid )SizedBox(height: 20.v),
+                if(GetPlatform.isIOS )AppleButton(),
+                SizedBox(height: 30.v),
                 GestureDetector(
                   onTap: onTapForgotTextSignUp,
                   child: Align(
@@ -98,7 +101,7 @@ class LoginScreen extends GetWidget<LoginController> {
                       child: Text("msg_forgot_password".tr,
                           style: CustomTextStyles.titleSmallBlack90001)),
                 ),
-                SizedBox(height: 30.v),
+                SizedBox(height: 20.v),
                 Align(
                     alignment: Alignment.center,
                     child: GestureDetector(
@@ -131,7 +134,7 @@ class LoginScreen extends GetWidget<LoginController> {
     });
   }
 
-  onTapForgotTextSignUp() {
+  onTapForgotTextSignUp() async{
     Get.toNamed(
       AppRoutes.forgotPasswordScreen,
     );
@@ -152,7 +155,7 @@ class GoogleButton extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 40.v,
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 4),
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 1, color: Color(0xB2A2A2A2)),
@@ -175,12 +178,72 @@ class GoogleButton extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomImageView(
-                        height: 24.adaptSize,
-                        imagePath: "assets/images/google_icon.png",
+                        height: 28.adaptSize,
+                        imagePath: "assets/images/Frame 427321018 (2).png",
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Google',
+                        'Continue with Google',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14.adaptSize,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w400,
+                          height: 0.09,
+                        ),
+                      ),
+                    ],
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class AppleButton extends StatelessWidget {
+  LoginController controller = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+
+    return InkWell(
+      onTap: () {
+       // controller.signInWithGoogle();
+        controller.signInWithApple();
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 40.v,
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 1, color: Color(0xB2A2A2A2)),
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: Center(
+          child: Obx(
+            () => controller.isLoadingApplelogin.value
+                ? Center(
+                    child: Container(
+                      height: 20.adaptSize,
+                        width: 20.adaptSize,
+                        child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                  )))
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomImageView(
+                        height: 28.adaptSize,
+                        imagePath: "assets/images/Apple ICON (1).png",
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Continue with Apple',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,

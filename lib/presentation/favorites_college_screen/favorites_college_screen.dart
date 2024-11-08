@@ -28,7 +28,19 @@ class _FavoritesCollegeScreenState extends State<FavoritesCollegeScreen> {
               )
             : controller.favrateCollegeList.message!.length == 0
                 ? Center(
-                    child: Text("No data found"),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        FloatingActionButton(onPressed: () {
+                          Get.toNamed(AppRoutes.topStudentsOneScreen);
+                          
+                        },
+                          child: Icon(Icons.add,color: Colors.white,),
+                        ),
+                        SizedBox(height: 20,),
+                        Text("Add college to favorite"),
+                      ],
+                    ),
                   )
                 : Padding(
                     padding: EdgeInsets.only(

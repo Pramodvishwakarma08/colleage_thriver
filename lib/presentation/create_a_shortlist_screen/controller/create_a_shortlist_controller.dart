@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/progress_dialog_utils.dart';
 import '../../../data/data_sources/remote/apI_endpoint_urls.dart';
 import '../../../data/data_sources/remote/api_client.dart';
+import '../../../routes/app_routes.dart';
 import '../../get_your_college_matches_screens/get_your_college_matches_screen/models/get_your_college_matches_model.dart';
 
 ///
@@ -29,7 +30,6 @@ class CreateAShortlistController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    nameController.dispose();
   }
 
 
@@ -59,6 +59,8 @@ class CreateAShortlistController extends GetxController {
       if (response.statusCode == 200) {
         isLoadingUpdateCollegeMatchOne(false);
         Get.back();
+        Get.back();
+        Get.toNamed(AppRoutes.findScholarshipsScreen);
         AppDialogUtils.showToast(message: '${response.data["message"]}');
       } else {
         isLoadingUpdateCollegeMatchOne.value = false;

@@ -66,7 +66,7 @@ class FileYourFafsaPage extends StatelessWidget {
       ),
 
       Spacer(),
-      _buttonRow(),
+      _buttonRow(context),
       SizedBox(height: 30.v),
 
      ],
@@ -130,6 +130,9 @@ class FileYourFafsaPage extends StatelessWidget {
                  style: CustomTextStyles.bodyLargeInterWhiteA700)),
 
          CustomElevatedButton(
+            onPressed: () {
+             controller.showPicker(context);
+            },
              width: 124.h,
              text: "lbl_png_jpg".tr,
              buttonStyle: CustomButtonStyles.fillGray,
@@ -138,10 +141,10 @@ class FileYourFafsaPage extends StatelessWidget {
   );
  }
 
- Widget _buttonRow() {
+ Widget _buttonRow(BuildContext context) {
   return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [_buildDoItLaterButton(), _buildMarkAsDoneButton()]);
+      children: [_buildDoItLaterButton(), _buildMarkAsDoneButton(context)]);
  }
 
  /// Section Widget
@@ -157,13 +160,13 @@ class FileYourFafsaPage extends StatelessWidget {
  }
 
  /// Section Widget
- Widget _buildMarkAsDoneButton() {
+ Widget _buildMarkAsDoneButton(BuildContext context) {
   return Expanded(
       child: CustomElevatedButton(
           text: "lbl_mark_as_done".tr,
           margin: EdgeInsets.only(left: 12.h),
           onPressed: () {
-           onTapMarkAsDoneButton();
+           onTapMarkAsDoneButton(context);
           }));
  }
 
@@ -177,9 +180,7 @@ onTapBack() {
  );
 }
  /// Navigates to the submitApplicationsTabContainerScreen when the action is triggered.
- onTapMarkAsDoneButton() {
-  Get.toNamed(
-   AppRoutes.congratulationsScreen,
-  );
+ onTapMarkAsDoneButton(BuildContext context) {
+  controller.showPicker(context);
  }
 }

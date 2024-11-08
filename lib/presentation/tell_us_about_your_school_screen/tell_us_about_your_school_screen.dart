@@ -59,7 +59,7 @@ class TellUsAboutYourSchoolScreen extends GetWidget<TellUsAboutYourSchoolControl
                               SizedBox(height: 9.v),
                               CustomTextFormField(
                                 controller: controller.gPA,
-                                textInputType: TextInputType.numberWithOptions(decimal: true),
+                                textInputType: TextInputType.numberWithOptions(decimal: true,signed: true),
                                 hintText: "lbl_overall_gpa".tr,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
@@ -146,7 +146,7 @@ class TellUsAboutYourSchoolScreen extends GetWidget<TellUsAboutYourSchoolControl
       child: DropdownButtonFormField(
         // validator:Validator.validateDouble,
         value: controller.yearInSchool,
-        items: controller.dropdownYearList.map((String item) {
+        items: controller.dropdownYearListchanged.map((String item) {
           return DropdownMenuItem(
             value: item,
             child: Text(item),

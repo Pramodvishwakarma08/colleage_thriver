@@ -356,14 +356,14 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 
 Future<void> _logOut() async {
   // await _auth.currentUser?.getIdToken(true);
+  Get.offAllNamed(AppRoutes.loginScreen,);
+
   Get.delete<HomePageCollegeController>(force: true);
    _auth.currentUser?.getIdToken(true);
    _auth.currentUser?.getIdTokenResult(true);
    _auth.signOut();
     sockettt.disconnect();
     GoogleSignIn().signOut();
-    
-  Get.offAllNamed(AppRoutes.loginScreen,);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setBool('isLoggedIn', false);
 }

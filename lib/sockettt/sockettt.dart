@@ -123,7 +123,11 @@ Future<void> socketConnect() async {
 
 Future<void> socketDisConnect() async {
   print("socketDisConnect_line117");
-  sockettt.disconnect(); // Disconnect the
+  try {
+    sockettt.disconnect();
+  }catch (e) {
+    print("socket DisConnect error");
+  }
 }
 
 

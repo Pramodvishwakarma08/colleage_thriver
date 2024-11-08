@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:colleage_thriver/data/data_sources/remote/api_client.dart';
 
 import '../../../data/data_sources/remote/apI_endpoint_urls.dart';
+import '../../../routes/app_routes.dart';
 /// A controller class for the VisitCollegesPage.
 ///
 /// This class manages the state of the VisitCollegesPage, including the
@@ -83,6 +84,8 @@ class VisitCollegesController extends GetxController {
     if (response.statusCode == 200) {
       print(json.encode(response.data));
       Get.back();
+      Get.back();
+      Get.toNamed(AppRoutes.chooseTheRightCollegeScreen);
     } else {
       print("response==statusCode>${response.statusCode}");
     }

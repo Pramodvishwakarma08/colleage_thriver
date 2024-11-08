@@ -31,6 +31,19 @@ class TellUsAboutYourSchoolController extends GetxController {
     'November',
     'December'
   ];
+
+
+  List<String> dropdownYearListchanged = [
+    'reflect-freshman',
+    'sophomore',
+    'junior',
+    'senior'
+  ];
+
+
+
+
+
   List<String> dropdownYearList = [
     '2010',
     '2011',
@@ -105,7 +118,7 @@ class TellUsAboutYourSchoolController extends GetxController {
         // highSchoolGraduationYear= "${ViewProfileModel.fromJson(response.data).data![0].graduationYear ?? ""}";
         highSchoolGraduationMonth =
             ViewProfileModel.fromJson(response.data).data![0].graduationMonth;
-        int? year =
+        String ? year =
             ViewProfileModel.fromJson(response.data).data![0].schoolYear;
         yearInSchool = year == null ? null : year.toString();
         selectGroup.text = ViewProfileModel.fromJson(response.data)

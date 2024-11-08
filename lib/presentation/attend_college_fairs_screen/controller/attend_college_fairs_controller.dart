@@ -56,7 +56,8 @@ class AttendCollegeFairsController extends GetxController {
           .postRequest(endPoint: AppUrls.college_2_of_05, body: data);
       if (response.statusCode == 200) {
         isLoadingUpdateCollegeMatchOne(false);
-        Get.back();
+        Get.toNamed(AppRoutes.chooseTheRightCollegeScreen);
+        // Get.back();
         AppDialogUtils.showToast(message: '${response.data["message"]}');
       } else {
         isLoadingUpdateCollegeMatchOne.value = false;

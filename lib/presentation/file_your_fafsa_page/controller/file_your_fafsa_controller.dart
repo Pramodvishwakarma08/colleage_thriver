@@ -11,6 +11,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../data/data_sources/remote/apI_endpoint_urls.dart';
 import '../../../data/data_sources/remote/api_client.dart';
+import '../../../routes/app_routes.dart';
 
 /// A controller class for the FileYourFafsaPage.
 ///
@@ -84,7 +85,8 @@ class FileYourFafsaController extends GetxController {
   if (response.statusCode == 200) {
    print(json.encode(response.data));
    Get.back();
-  } else {
+   Get.back();
+   Get.toNamed(AppRoutes.findScholarshipsScreen);  } else {
    print("response==statusCode>${response.statusCode}");
   }
   Fluttertoast.showToast(msg: "${response.data["message"]}");

@@ -21,7 +21,7 @@ version: 1.0.5+1
 environment:
   sdk: '>=3.2.4 <4.0.0'
 
-# Dependencies specify other packages that your package needs in order to work.
+# sa  Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
 # dependencies can be manually updated by changing the version numbers below to
@@ -49,6 +49,7 @@ dependencies:
   shimmer: ^3.0.0
   timezone:
   permission_handler: ^10.3.0
+  the_apple_sign_in: ^1.1.1
 
   cupertino_icons: ^1.0.6
   camera:

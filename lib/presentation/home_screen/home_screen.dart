@@ -200,14 +200,16 @@ class HomeScreen extends GetWidget<HomePageCollegeController> {
     return Expanded(
         child: CustomOutlinedButton(
             onPressed: () async{
+              print("object");
               try {
                   final Uri emailUri = Uri(
                     scheme: 'mailto',
-                    path: "collegethriverapp@gmail.com",
+                    path: "support@colleage-thriver.org",
                   );
                 //  final Uri emailUri = Uri.parse("https://www.aamu.edu/");
                 await launchUrl(emailUri);
               } catch (e, s) {
+                print("easdf#${e.toString()}");
                 Logger().e(e, stackTrace: s);
               }
             },

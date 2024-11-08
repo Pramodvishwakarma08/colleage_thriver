@@ -54,6 +54,7 @@ class ChooseYourCollegeController extends GetxController {
       if (response.statusCode == 200) {
         Get.back();
         Get.back();
+        Get.toNamed(AppRoutes.chooseTheRightCollegeScreen);
         AppDialogUtils.showToast(message: '${response.data["message"]}');
       } else {
       }

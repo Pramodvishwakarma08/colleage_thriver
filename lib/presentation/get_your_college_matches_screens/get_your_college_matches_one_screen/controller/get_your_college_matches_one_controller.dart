@@ -77,6 +77,8 @@ class GetYourCollegeMatchesOneController extends GetxController {
         Get.back();
         Get.back();
         Get.back();
+        Get.back();
+        Get.toNamed(AppRoutes.chooseTheRightCollegeScreen);
         AppDialogUtils.showToast(message: '${response.data["message"]}');
       } else {
         isLoadingUpdateCollegeMatchOne.value = false;

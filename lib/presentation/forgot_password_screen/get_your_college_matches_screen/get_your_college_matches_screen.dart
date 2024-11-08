@@ -163,6 +163,7 @@ class GetYourCollegeMatchesScreen
             hintText: "Enter zip code".tr,
             hintStyle: CustomTextStyles.titleSmallBlack90001Medium!,
             textInputType: TextInputType.number,
+
             validator: Validator.enterYourZipCode,
             textInputAction: TextInputAction.done)
       ])

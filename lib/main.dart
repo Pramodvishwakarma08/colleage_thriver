@@ -8,11 +8,8 @@ import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  SystemChrome.setPreferredOrientations([  DeviceOrientation.portraitUp,
   ]).then((value) {
     // Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
     runApp(MyApp());
@@ -20,13 +17,10 @@ void main() async{
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-
   @override
   Widget build(BuildContext context) {
     return LifeCycleManager(
       child: App(),
-
     );
   }
 }
@@ -41,7 +35,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Sizer(builder: (context, orientation, deviceType) {
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -60,4 +53,4 @@ class App extends StatelessWidget {
 RxInt activeChatId = 0.obs ;
 
 
-// govind.ctinfotech@gmail.com
+// 8 nov//

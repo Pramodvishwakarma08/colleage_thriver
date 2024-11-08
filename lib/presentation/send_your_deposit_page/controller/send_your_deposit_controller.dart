@@ -9,7 +9,8 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../data/data_sources/remote/apI_endpoint_urls.dart';
-import '../../../data/data_sources/remote/api_client.dart';/// A controller class for the SendYourDepositPage.
+import '../../../data/data_sources/remote/api_client.dart';
+import '../../../routes/app_routes.dart';/// A controller class for the SendYourDepositPage.
 ///
 /// This class manages the state of the SendYourDepositPage, including the
 /// current sendYourDepositModelObj
@@ -83,6 +84,8 @@ class SendYourDepositController extends GetxController {
   if (response.statusCode == 200) {
    print(json.encode(response.data));
    Get.back();
+   Get.back();
+   Get.toNamed(AppRoutes.chooseTheRightCollegeScreen);
   } else {
    print("response==statusCode>${response.statusCode}");
   }

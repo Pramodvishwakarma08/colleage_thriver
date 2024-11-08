@@ -66,7 +66,7 @@ class GetYourCollegeMatchesThreeScreen
                               SizedBox(height: 8.v),
                               CustomTextFormField(
                                   validator: Validator.notEmpty,
-                                  textInputType: TextInputType.numberWithOptions(decimal: true,),
+                                  textInputType: TextInputType.numberWithOptions(decimal: true,signed: true),
                                   controller: controller.SATcontroller,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
@@ -78,7 +78,7 @@ class GetYourCollegeMatchesThreeScreen
                               SizedBox(height: 8.v),
                               CustomTextFormField(
                                   validator: Validator.notEmpty,
-                                  textInputType: TextInputType.numberWithOptions(decimal: true),
+                                  textInputType: TextInputType.numberWithOptions(decimal: true,signed: true),
                                   controller: controller.ACTcontroller,
                                   hintText: "msg_overall_act_score".tr,
                                   inputFormatters: [

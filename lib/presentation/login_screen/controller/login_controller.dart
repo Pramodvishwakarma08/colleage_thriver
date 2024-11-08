@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:colleage_thriver/core/app_export.dart';
 import 'package:colleage_thriver/data/data_sources/remote/apI_endpoint_urls.dart';
@@ -7,6 +8,7 @@ import 'package:colleage_thriver/presentation/login_screen/models/login_model.da
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 import '../../../core/utils/progress_dialog_utils.dart';
 import '../../../data/data_sources/remote/api_client.dart';
 import '../../../sockettt/sockettt.dart';
@@ -18,53 +20,14 @@ class LoginController extends GetxController {
   Rx<LoginModel> loginModelObj = LoginModel().obs;
   Rx<bool> isShowPassword = true.obs;
   Rx<bool> isLoading = false.obs;
-  Rx<bool> isLoadingGooglelogin = false.obs;
+
 
   @override
   void onClose() {
     super.onClose();
-    // emailValueController.dispose();
-    // sVGController.dispose();
+
   }
 
-  // Future<void> onTapLogin() async {
-  //   // bool okk =await  ApiClient().checkInternetConnection();
-  //   print("checkInternetConnection==}");
-  //
-  //   isLoading.value = true;
-  //   var data = {
-  //     'email': '${emailValueController.text}',
-  //     'password': '${sVGController.text}'
-  //   };
-  //   try {
-  //     var response =
-  //         await ApiClient().postRequest(endPoint: AppUrls.login, body: data);
-  //     print("line_36");
-  //     isLoading.value = false;
-  //     print(response.toString());
-  //     if (response.statusCode == 200) {
-  //       SharedPreferences prefs = await SharedPreferences.getInstance();
-  //       print("dfsfdfksfsdfsdf");
-  //       await prefs.setBool('isLoggedIn', true);
-  //       await prefs.setString('token', "${response.data["token"]}");
-  //       Get.offAllNamed(AppRoutes.homeScreen);
-  //       AppDialogUtils.showToast(message: "${response.data["message"]}");
-  //     } else {
-  //       print("objectsdf");
-  //       AppDialogUtils.showToast(
-  //           message: "${response.data["message"]}",
-  //           toastLength: Toast.LENGTH_LONG);
-  //     }
-  //   } catch (e, stackTrace) {
-  //     isLoading.value = false;
-  //     AppDialogUtils.showToast(message: '${e.toString()}');
-  //     print("catch(e)==>${e.toString()}");
-  //     print("stackTrace:${stackTrace}");
-  //   }
-  // }
-
-  //google login
-  //
   Future<void> loginWithGoogleWithBackend({
     required String email,
     required String token,
@@ -73,88 +36,44 @@ class LoginController extends GetxController {
   }) async {
     isLoading.value = true;
     var data = {
-      'email': email,
+      'user_id': email,
       'token': token,
       "name": name,
       "lname": lastname
     };
     try {
-      var response = await ApiClient().postRequest(endPoint: AppUrls.loginWithGoogle, body: data);
+      var response = await ApiClient().postRequest(
+          endPoint: AppUrls.loginWithGoogle, body: data);
       if (response.statusCode == 200) {
+        isLoadingGooglelogin.value = false;
+        isLoadingApplelogin.value = false;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         try {
           socketDisConnect();
           socketConnect();
-        }catch(e){
-          print("Error sockettt.connect() ${e.toString()}");
+        } catch (e) {
+          print("Error socket.connect() ${e.toString()}");
         }
-
-        // await prefs.setString('token', "${response.data["token"]}");
         Get.offAllNamed(AppRoutes.homeScreen);
-
-        isLoading.value = false;
         AppDialogUtils.showToast(message: "${response.data["message"]}");
       } else {
         isLoading.value = false;
-        AppDialogUtils.showToast(
-            message: "${response.data["message"]}",
-            toastLength: Toast.LENGTH_LONG);
+        AppDialogUtils.showToast(message: "${response.data["message"]}", toastLength: Toast.LENGTH_LONG);
       }
     } catch (e) {
+      isLoadingGooglelogin.value = false;
+      isLoadingApplelogin.value = false;
       isLoading.value = false;
       AppDialogUtils.showToast(message: '${e.toString()}');
     }
   }
 
-  // List<String> scopes = <String>[
-  //   'email',
-  //   'https://www.googleapis.com/auth/contacts.readonly',
-  // ];
-  //
-  // GoogleSignIn _googleSignIn = GoogleSignIn(
-  //   scopes: [],
-  // );
-  //
-  //
-  // Future<void> signInWithGoogle() async {
-  //   _googleSignIn.signOut();
-  //   try {
-  //     final GoogleSignInAccount? reslut = await _googleSignIn.signIn();
-  //     if (reslut == null) {
-  //       print('user null');
-  //       return;
-  //     } else {
-  //       final userData = await reslut.authentication;
-  //       final credential = GoogleAuthProvider.credential(
-  //           accessToken: userData.accessToken, idToken: userData.idToken);
-  //       var finalResult =
-  //           await FirebaseAuth.instance.signInWithCredential(credential);
-  //       var fullname = await FirebaseAuth.instance.currentUser?.displayName;
-  //       var email = await FirebaseAuth.instance.currentUser!.email!;
-  //       var token = await FirebaseAuth.instance.currentUser!.uid;
-  //       print("fullname==>${fullname}");
-  //       List<String> nameParts = fullname!.split(' ');
-  //       String firstName = nameParts[0];
-  //       String lastName = nameParts[1];
-  //       print("First Name: $firstName");
-  //       print("Last Name: $lastName");
-  //
-  //       print("email==>${email}");
-  //       print("token==>${token}");
-  //       print("finalResult==>${finalResult}");
-  //       loginWithGoogleWithBackend(
-  //           email: email, token: token, lastname: lastName, name: firstName);
-  //     }
-  //   } catch (error) {
-  //     print('=====Google Sign-In Error: $error');
-  //   }
-  // }
 
   final _auth = FirebaseAuth.instance;
 
 
-  Future<void> googleLogin( User ? user ) async {
+  Future<void> googleLogin(User ? user) async {
     await user?.getIdToken();
   }
 
@@ -167,13 +86,15 @@ class LoginController extends GetxController {
         password: sVGController.text,
       );
       print("${_auth.currentUser?.refreshToken}");
-      getIdToken(_auth.currentUser);
+      getIdToken(_auth.currentUser,"signInWithEmailAndPassword");
     } on FirebaseAuthException catch (e) {
       isLoading.value = false;
       if (e.code == 'network-request-failed') {
         log('No Internet Connection');
       } else if (e.code == "invalid-credential") {
-        AppDialogUtils.showToast(message: "Please Enter correct Email or Password",toastLength: Toast.LENGTH_LONG);
+        AppDialogUtils.showToast(
+            message: "Please Enter correct Email or Password",
+            toastLength: Toast.LENGTH_LONG);
       } else if (e.code == 'user-not-found') {
         AppDialogUtils.showToast(message: "User not found");
       } else if (e.code == 'too-many-requests') {
@@ -188,33 +109,37 @@ class LoginController extends GetxController {
   }
 
 
-  Future<void> getIdToken( User ? user ) async {
+  Future<void> getIdToken(User ? user, String email_password) async {
     if (user != null) {
       try {
-        var name = splitName(user.displayName!);
-        String ?  idToken = await user.getIdToken();
-        String ?  rfToken = await user.refreshToken;
-        // print('ID Token:==> $idToken  ===>');
-        log("ID Token:==> $idToken  ===>");
-        log("rfToken:==> $rfToken  ===>");
-        if(user.emailVerified){
-          isLoadingGooglelogin.value = false;
-          isLoading.value = false;
-          loginWithGoogleWithBackend(email: user.email!, token: idToken!, name: '${name["firstName"]}', lastname: '${name["lastName"]}');
+        var name = splitName(user.displayName ?? "*** *****");
+        String ? idToken = await user.getIdToken();
+        if("signInWithEmailAndPassword" == email_password){
+          if (user.emailVerified) {
+            loginWithGoogleWithBackend(email: user.uid,
+                token: idToken!,
+                name: '${name["firstName"]}',
+                lastname: '${name["lastName"]}');
+          } else {
+            // isLoadingGooglelogin.value = false;
+            isLoading.value = false;
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setBool('isLoggedIn', false);
+            AppDialogUtils.showToast(message: "Please check your email to confirm your account", toastLength: Toast.LENGTH_LONG);
+          }
 
-          //   Get.offAllNamed(AppRoutes.homeScreen);
         }else{
-          isLoadingGooglelogin.value = false;
-          isLoading.value = false;
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setBool('isLoggedIn', true);
-
-          AppDialogUtils.showToast(message: "Please check your email to confirm your account",toastLength: Toast.LENGTH_LONG);
+          loginWithGoogleWithBackend(email: user.uid,
+              token: idToken!,
+              name: '${name["firstName"]}',
+              lastname: '${name["lastName"]}');
         }
-      } catch (e) {
-        isLoadingGooglelogin.value = false;
+
+
+      } catch (e, line) {
         isLoading.value = false;
         print('Error getting ID token: $e');
+        print('line$line');
       }
     } else {
       print('No user is currently signed in.');
@@ -234,6 +159,8 @@ class LoginController extends GetxController {
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  Rx<bool> isLoadingGooglelogin = false.obs;
+  Rx<bool> isLoadingApplelogin = false.obs;
 
   // Future<void> signInWithGoogle() async {
   //   isLoadingGooglelogin.value = true;
@@ -290,37 +217,63 @@ class LoginController extends GetxController {
 
   Future<void> signInWithGoogle() async {
     isLoadingGooglelogin.value = true;
-
-    // Optional: Sign out from Google to force the selection of an account each time
     await googleSignIn.signOut();
-
     try {
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn
+          .signIn();
       if (googleSignInAccount == null) {
         throw Exception('User canceled sign-in');
       }
       final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken, idToken: googleSignInAuthentication.idToken,);
-      final UserCredential userCredential = await firebaseAuth.signInWithCredential(credential);
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,);
+      final UserCredential userCredential = await firebaseAuth
+          .signInWithCredential(credential);
       final User? user = await userCredential.user;
-
-      String ? refreshToken = "${userCredential.credential?.token}";
-      log('credential?.token==> ${refreshToken}');
-      log("refreshToken===>${await userCredential.user?.refreshToken}");
-      // print("(Get ID Token (Access Token)==>${await user?.getIdToken()}");
-
       if (user == null) {
-        throw Exception('User not found');
+        AppDialogUtils.showToast(message: "User not found");
+        isLoadingGooglelogin.value = false;
       } else {
-        await getIdToken(user);
+        await getIdToken(user,"signInWithGoogle");
       }
     } catch (error) {
-      print('signInWithGoogle failed: $error');
-      rethrow; // Rethrow the error to handle it at a higher level if necessary
-    } finally {
-      // Ensure the loading indicator is stopped, whether the login succeeded or failed
+      AppDialogUtils.showToast(message: "signInWithGoogle failed: ${error}");
       isLoadingGooglelogin.value = false;
+    } finally {
+      isLoadingGooglelogin.value = false;
+    }
+  }
+
+  Future<void> signInWithApple() async {
+    isLoadingApplelogin.value = true;
+    final result = await TheAppleSignIn.performRequests(
+        [AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])]);
+    switch (result.status) {
+      case AuthorizationStatus.authorized:
+        final AppleIdCredential = result.credential!;
+        final oAuthCredential = OAuthProvider('apple.com');
+        final credential = oAuthCredential.credential(
+            idToken: String.fromCharCodes(AppleIdCredential.identityToken!));
+        final UserCredential userCredential = await firebaseAuth
+            .signInWithCredential(credential);
+        final firebaseUser = userCredential.user!;
+        await getIdToken(firebaseUser,"signInWithApple");
+        break;
+      case AuthorizationStatus.error:
+        isLoadingApplelogin.value = false;
+        AppDialogUtils.showToast(message: "${result.error.toString()}");
+        break;
+
+      case AuthorizationStatus.cancelled:
+        isLoadingApplelogin.value = false;
+        AppDialogUtils.showToast(message: "Sign in aborted by user");
+        break;
+
+      default:
+        isLoadingApplelogin.value = false;
+        throw UnimplementedError();
     }
   }
 

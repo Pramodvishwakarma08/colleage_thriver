@@ -115,6 +115,9 @@ class SendYourDepositPage extends StatelessWidget {
                     style: CustomTextStyles.bodyLargeInterWhiteA700)),
 
             CustomElevatedButton(
+              onPressed: () {
+                controller.showPicker(Get.context);
+              },
                 width: 124.h,
                 text: "lbl_png_jpg".tr,
                 buttonStyle: CustomButtonStyles.fillGray,
@@ -156,8 +159,7 @@ class SendYourDepositPage extends StatelessWidget {
 
   /// Navigates to the submitApplicationsTabContainerScreen when the action is triggered.
   onTapMarkAsDoneButton() {
-    Get.back(
-    );
+    controller.showPicker(Get.context);
   }
 
 

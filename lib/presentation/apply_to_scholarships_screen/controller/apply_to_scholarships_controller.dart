@@ -47,6 +47,8 @@ class ApplyToScholarshipsController extends GetxController {
       if (response.statusCode == 200) {
         isLoadingUpdateCollegeMatchOne(false);
         Get.back();
+        Get.back();
+        Get.toNamed(AppRoutes.findScholarshipsScreen);
         AppDialogUtils.showToast(message: '${response.data["message"]}');
       } else {
         isLoadingUpdateCollegeMatchOne.value = false;

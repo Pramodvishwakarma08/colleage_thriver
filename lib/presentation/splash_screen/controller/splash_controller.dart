@@ -19,10 +19,10 @@ class SplashController extends GetxController {
       //
 
       //
-      if (checkForIssues.isNotEmpty) {
-        Get.offAll(WaringScreen(waring: checkForIssues.map((e) => e.name).toList().join(", ")));
-        return;
-      }
+      // if (checkForIssues.isNotEmpty) {
+      //   Get.offAll(()=>WaringScreen(waring: checkForIssues.map((e) => e.name).toList().join(", ")));
+      //   return;
+      // }
 
       // Get.to(() => TodoList());
       // isOnboarding

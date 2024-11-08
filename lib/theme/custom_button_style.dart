@@ -95,6 +95,19 @@ class CustomButtonStyles {
           borderRadius: BorderRadius.circular(12.h),
         ),
       );
+
+
+
+  static ButtonStyle get outlinegreenDone => OutlinedButton.styleFrom(
+    backgroundColor:  Color(0xff2FB600),
+    side: BorderSide(
+      color: Colors.white,
+      width: 1,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12.h),
+    ),
+  );
   static ButtonStyle get outlineYellow => OutlinedButton.styleFrom(
         backgroundColor: appTheme.whiteA700,
         side: BorderSide(
